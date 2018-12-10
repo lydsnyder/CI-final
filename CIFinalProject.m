@@ -14,8 +14,7 @@ filename = 'coffee_labelVectors.csv';
 coffeeLabels = csvread(filename);
 
 %% Separate the data into Test and Reference Data %%
-
-
+[referenceData, referenceLabel, testData, expectedTestLabel] = generateData(coffeeInputs, coffeeLabels);
 
 %% Run K-nearest Neighbor %%
 
