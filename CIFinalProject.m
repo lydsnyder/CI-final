@@ -8,8 +8,17 @@
 
 %% Import the data %%
 
+filename = 'coffee_inputs.csv';
+coffeeInputs = csvread(filename);
+filename = 'coffee_labelVectors.csv';
+coffeeLabels = csvread(filename);
+
 %% Separate the data into Test and Reference Data %%
 
+
+
 %% Run K-nearest Neighbor %%
+
+
 
 %% Display Output %%
