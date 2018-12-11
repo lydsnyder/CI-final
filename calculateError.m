@@ -17,7 +17,7 @@ for i = 1:size(outputLabel)
     totalNum = totalNum + 1;
 end
 
-calculatedError = (correctNum)/(totalNum);
+calculatedError = (correctNum)/(totalNum) * 100;
         
 end
 
