@@ -1,8 +1,8 @@
-function [outputLabel] = kNN(referenceData, referenceLabel, testData, expectedLabel)
+function [outputLabel] = kNN(referenceData, referenceLabel, testData)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 
-outputLabel = expectedLabel;
+outputLabel = referenceLabel(1);
 %% plot referencedata, label with referenceLabel %%
 
 %% one by one, find the K-nearest neighbors for each "point" (row) in testData %%
@@ -14,7 +14,7 @@ for i = 1:size(testData)
     
     % append our determined category to our output matrix %
     categoryRow = [0 0 0 0 0 0 0 0 0 0 0]; %temporary label row%
-    outputLabel(i,:) = categoryRow;
+    outputLabel(i) = [outputLabel;categoryRow];
 end
 
 end

@@ -18,7 +18,7 @@ coffeeLabels = csvread(filename);
 
 %% Run K-nearest Neighbor %%
 
-[outputLabel] = kNN(referenceData, referenceLabel, testData);
+[outputLabel] = kNN(referenceData, referenceLabel, testData, expectedTestLabel);
 
 %% Determine Error %%
 
