@@ -10,25 +10,25 @@ coffeeLabel = 'binary_coffee_labelVectors.csv';
 numNeighbors = randi([1,25],1,20);
 percentTest = randi([5,40],1,20);
 for x = 1:20
-    string = sprintf('Fuzzy Wine %d\nK-Neighbor: %d\nPercent Tested On: %d', x, numNeighbors(x), percentTest(x));
+    string = sprintf('Fuzzy Wine %d\nK-Neighbor: %d\nPercent Tested On: %d', x, numNeighbors(x), percentTest);
     disp(string);
-    CIFinalProject(fuzzyWineInput, fuzzyWineLabel, percentTest(x), numNeighbors(x));
+    CIFinalProject(fuzzyWineInput, fuzzyWineLabel, percentTest, numNeighbors);
 end
 
 for x = 1:20
     string = sprintf('Fuzzy Coffee %d\nK-Neighbor: %d\nPercent Tested On: %d', x, numNeighbors(x), percentTest(x));
     disp(string);
-    CIFinalProject(fuzzyCoffeeInput, fuzzyCoffeeLabel, percentTest(x), numNeighbors(x));
+    CIFinalProject(fuzzyCoffeeInput, fuzzyCoffeeLabel, randi([5,40],1), randi([1,20],1));
 end
 
 for x = 1:20
     string = sprintf('Wine %d\nK-Neighbor: %d\nPercent Tested On: %d', x, numNeighbors(x), percentTest(x));
     disp(string);
-    CIFinalProject(wineInput, wineLabel, percentTest(x), numNeighbors(x));
+    CIFinalProject(wineInput, wineLabel, randi([5,40],1), randi([1,20],1));
 end
 
 for x = 1:20
-    string = sprintf('Coffee %d\nK-Neighbor: %d\nPercent Tested On: %d', x, numNeighbors(x), percentTest(x));
+    string = sprintf('Coffee %d\nK-Neighbor: %d\nPercent Tested On: %d', x, numNeighbors(x), percentTest);
     disp(string);
-    CIFinalProject(coffeeInput, coffeeLabel, percentTest(x), numNeighbors(x));
+    CIFinalProject(coffeeInput, coffeeLabel, randi([5,40],1), randi([1,20],1));
 end
