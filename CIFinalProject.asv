@@ -13,33 +13,25 @@ coffeeInputs = csvread(filename);
 filename = 'fuzzy_wine_labelVectors.csv';
 coffeeLabels = csvread(filename);
 
-%% Separate the data into Test and Reference Data %%
-[referenceData, referenceLabel, testData, expectedTestLabel] = generateData(coffeeInputs, coffeeLabels, .3);
-
 %% Convert Label into Index %%
-[x,y] = size(referenceLabel);
-convRefLabel = zeros(1,x);
-for i = 1:x
-    [val, idx] = max(referenceLabel(i,:));
+convRefLabel = zeros(1,size(coffeeLabels));
+for i = size(coffeeLabels)
+    [val, idx] = max(coffeeLabels(i));
     convRefLabel(i) = idx;
 end 
 
-[x,y] = size(expectedTestLabel);
-convTestLabel = zeros(1,x);
-for i = 1:x
-    [val, idx] = max(expectedTestLabel(i,:));
-    convTestLabel(i) = idx;
-end 
+%% Separate the data into Test and Reference Data %%
+[referenceData, referenceLabel, testData, expectedTestLabel] = generateData(coffeeInputs, coffeeLabels, .3);
 
 %% Run K-nearest Neighbor %%
 
 %[outputLabel] = kNN(referenceData, referenceLabel, testData, expectedTestLabel, 15);
-Mdl = fitcknn(referenceData,convRefLabel,'NumNeighbors',5,'Standardize',1);
+Mdl = fitcknn(referenceData,referenceLabel,'NumNeighbors',5,'Standardize',1);
 [outputLabel] = predict(Mdl,testData);
 
 %% Determine Error %%
 
-[calculatedError] = calculateError(outputLabel, convTestLabel);
+[calculatedError] = calculateError(outputLabel, expectedTestLabel);
 
 %% Display Output %%
 

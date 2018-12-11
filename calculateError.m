@@ -8,8 +8,8 @@ true = 1;
 %% Not sure how we want to do this, whether we want some sort of matrix or percent error%%
 
 for i = 1:size(outputLabel)
-    actual = outputLabel(i,:);
-    expected = expectedLabel(i,:);
+    actual = outputLabel(i);
+    expected = expectedLabel(i);
     correct = isequal(actual,expected);
     if correct == true
         correctNum = correctNum + 1;
