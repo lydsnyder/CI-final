@@ -29,7 +29,7 @@ for i = 1:size(testData)
     sumLabel = sum(topDistanceLabel,1);
     [value, index] = max(sumLabel);
     % append our determined category to our output matrix %
-    categoryRow = [0 0 0 0 0 0 0 0 0 0 0]; %temporary label row%
+    categoryRow = zeros(expectedLabelRow,1); %temporary label row%
     categoryRow(index) = 1;
     outputLabel(i,:) = categoryRow;
 end

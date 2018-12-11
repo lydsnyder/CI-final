@@ -8,9 +8,9 @@
 
 %% Import the data %%
 
-filename = 'binary_coffee_inputs.csv';
+filename = 'fuzzy_wine_inputs.csv';
 coffeeInputs = csvread(filename);
-filename = 'binary_coffee_labelVectors.csv';
+filename = 'fuzzy_wine_labelVectors.csv';
 coffeeLabels = csvread(filename);
 
 %% Separate the data into Test and Reference Data %%
@@ -18,7 +18,7 @@ coffeeLabels = csvread(filename);
 
 %% Run K-nearest Neighbor %%
 
-[outputLabel] = kNN(referenceData, referenceLabel, testData, expectedTestLabel, 5);
+[outputLabel] = kNN(referenceData, referenceLabel, testData, expectedTestLabel, 15);
 
 %% Determine Error %%
 
