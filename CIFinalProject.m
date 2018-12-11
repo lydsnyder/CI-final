@@ -25,3 +25,5 @@ coffeeLabels = csvread(filename);
 [calculatedError] = calculateError(outputLabel, expectedTestLabel);
 
 %% Display Output %%
+
+resultVisualization(calculatedError);

@@ -3,8 +3,6 @@ function [calculatedError] = calculateError(outputLabel,expectedLabel)
 %   Detailed explanation goes here
 
 correctNum = 0;
-totalNum = 0;
-true = 1;
 %% Not sure how we want to do this, whether we want some sort of matrix or percent error%%
 
 for i = 1:size(outputLabel)
@@ -14,10 +12,9 @@ for i = 1:size(outputLabel)
     if correct == true
         correctNum = correctNum + 1;
     end
-    totalNum = totalNum + 1;
 end
 
-calculatedError = (correctNum)/(totalNum);
+calculatedError = (size(outputLabel) - correctNum)/size(outputLabel);
         
 end
 
