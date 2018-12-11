@@ -3,8 +3,10 @@
 % K-nearest Neighbor
 % Fall 2018
 
-% Lia ???
+% Lia Howe
 % Lydia Snyder
+
+function [referenceData, referenceLabel, testData, expectedTestLabel] = generateData(inputs, labels, percentage)
 
 %% Import the data %%
 
@@ -13,25 +15,33 @@ coffeeInputs = csvread(filename);
 filename = 'fuzzy_wine_labelVectors.csv';
 coffeeLabels = csvread(filename);
 
+%% Separate the data into Test and Reference Data %%
+[referenceData, referenceLabel, testData, expectedTestLabel] = generateData(coffeeInputs, coffeeLabels, .3);
+
 %% Convert Label into Index %%
-convRefLabel = zeros(1,size(coffeeLabels));
-for i = size(coffeeLabels)
-    [val, idx] = max(coffeeLabels(i));
+[x,y] = size(referenceLabel);
+convRefLabel = zeros(1,x);
+for i = 1:x
+    [val, idx] = max(referenceLabel(i,:));
     convRefLabel(i) = idx;
 end 
 
-%% Separate the data into Test and Reference Data %%
-[referenceData, referenceLabel, testData, expectedTestLabel] = generateData(coffeeInputs, coffeeLabels, .3);
+[x,y] = size(expectedTestLabel);
+convTestLabel = zeros(1,x);
+for i = 1:x
+    [val, idx] = max(expectedTestLabel(i,:));
+    convTestLabel(i) = idx;
+end 
 
 %% Run K-nearest Neighbor %%
 
 %[outputLabel] = kNN(referenceData, referenceLabel, testData, expectedTestLabel, 15);
-Mdl = fitcknn(referenceData,referenceLabel,'NumNeighbors',5,'Standardize',1);
+Mdl = fitcknn(referenceData,convRefLabel,'NumNeighbors',20,'Standardize',1);
 [outputLabel] = predict(Mdl,testData);
 
 %% Determine Error %%
 
-[calculatedError] = calculateError(outputLabel, expectedTestLabel);
+[calculatedError] = calculateError(outputLabel, convTestLabel);
 
 %% Display Output %%
 

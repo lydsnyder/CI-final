@@ -3,44 +3,45 @@
 % K-nearest Neighbor
 % Fall 2018
 
-% Lia ???
+% Lia Howe
 % Lydia Snyder
 
-%% Import the data %%
+function CIFinalProject(inputFilename, labelFilename, percentage, numNeighbors)
 
-filename = 'fuzzy_wine_inputs.csv';
-coffeeInputs = csvread(filename);
-filename = 'fuzzy_wine_labelVectors.csv';
-coffeeLabels = csvread(filename);
+    %% Import the data %%
 
-%% Separate the data into Test and Reference Data %%
-[referenceData, referenceLabel, testData, expectedTestLabel] = generateData(coffeeInputs, coffeeLabels, .3);
+    coffeeInputs = csvread(inputFilename);
+    coffeeLabels = csvread(labelFilename);
 
-%% Convert Label into Index %%
-[x,y] = size(referenceLabel);
-convRefLabel = zeros(1,x);
-for i = 1:x
-    [val, idx] = max(referenceLabel(i,:));
-    convRefLabel(i) = idx;
-end 
+    %% Separate the data into Test and Reference Data %%
+    [referenceData, referenceLabel, testData, expectedTestLabel] = generateData(coffeeInputs, coffeeLabels, percentage/100);
 
-[x,y] = size(expectedTestLabel);
-convTestLabel = zeros(1,x);
-for i = 1:x
-    [val, idx] = max(expectedTestLabel(i,:));
-    convTestLabel(i) = idx;
-end 
+    %% Convert Label into Index %%
+    [x,~] = size(referenceLabel);
+    convRefLabel = zeros(1,x);
+    for i = 1:x
+        [~, idx] = max(referenceLabel(i,:));
+        convRefLabel(i) = idx;
+    end 
 
-%% Run K-nearest Neighbor %%
+    [x,~] = size(expectedTestLabel);
+    convTestLabel = zeros(1,x);
+    for i = 1:x
+        [~, idx] = max(expectedTestLabel(i,:));
+        convTestLabel(i) = idx;
+    end 
 
-%[outputLabel] = kNN(referenceData, referenceLabel, testData, expectedTestLabel, 15);
-Mdl = fitcknn(referenceData,convRefLabel,'NumNeighbors',5,'Standardize',1);
-[outputLabel] = predict(Mdl,testData);
+    %% Run K-nearest Neighbor %%
 
-%% Determine Error %%
+    %[outputLabel] = kNN(referenceData, referenceLabel, testData, expectedTestLabel, 15);
+    Mdl = fitcknn(referenceData,convRefLabel,'NumNeighbors',numNeighbors,'Standardize',1);
+    [outputLabel] = predict(Mdl,testData);
 
-[calculatedError] = calculateError(outputLabel, convTestLabel);
+    %% Determine Error %%
 
-%% Display Output %%
+    [calculatedError] = calculateError(outputLabel, convTestLabel);
 
-resultVisualization(calculatedError);
+    %% Display Output %%
+
+    resultVisualization(calculatedError);
+end
